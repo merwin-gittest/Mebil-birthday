@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Mebil ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        /* Landing Page */
+        .landing {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            z-index: 1000;
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .landing.hidden {
+            opacity: 0;
+            transform: scale(1.1);
+            pointer-events: none;
+        }
+
+        .landing h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .landing p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s backwards;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .start-btn {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            background: white;
+            color: #f5576c;
+            font-weight: bold;
+            cursor: pointer;
+            animation: fadeInUp 1s ease 0.6s backwards, pulse 2s infinite 2s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+
+        .start-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Main Container */
+        .container {
+            opacity: 0;
+            transition: opacity 1s;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container.visible {
+            opacity: 1;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeIn 1s ease;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .header .date {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        /* Section */
+        .section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: slideUp 0.6s ease;
+        }
+
+        /* Countdown */
+        .countdown {
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+
+        .countdown-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Photo Gallery */
+        .photo-gallery {
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .photo-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            background: #000;
+        }
+
+        .photo {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .photo.active {
+            opacity: 1;
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Individual photo positioning */
+        #photo1 img {
+            object-position: center 70%;
+            transform: scale(1.1);
+        }
+
+        #photo2 img {
+            object-position: center 5%;
+            transform: scale(1.15);
+        }
+
+        #photo3 img {
+            object-position: 45% 100%;
+            transform: scale(1.1);
+        }
+
+        #photo4 img {
+            object-position: 30% center;
+        }
+
+        #photo5 img {
+        
+            object-position: center 30%;
+            transform: scale(1.05);
+        }
+
+        .photo-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .photo-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .photo-dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
+
+        /* Interactive Button */
+        .interactive-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 15px 0;
+            border: none;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #333;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interactive-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .interactive-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .interactive-btn:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Cake Animation */
+        .cake-container {
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .cake {
+            font-size: 5rem;
+            animation: bounce 2s infinite;
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .cake:active {
+            transform: scale(1.2);
+        }
+
+        .candles {
+            font-size: 2rem;
+            margin-top: -20px;
+        }
+
+        /* Chocolate Rain */
+        .chocolate {
+            position: fixed;
+            font-size: 2rem;
+            pointer-events: none;
+            z-index: 999;
+            animation: fall linear;
+        }
+
+        /* Message Box */
+        .message-box {
+            background: rgba(255,255,255,0.95);
+            color: #333;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            animation: slideUp 0.6s ease;
+        }
+
+        .message-box.special {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border: 2px solid #ffd700;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-box.special::before {
+            content: '✨';
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.1;
+            top: -10px;
+            right: -10px;
+            animation: spin 20s linear infinite;
+        }
+
+        /* Rain Animation */
+        .rain-container {
+            position: relative;
+            height: 300px;
+            background: linear-gradient(to bottom, #4a5568, #2d3748);
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+
+        .raindrop {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: linear-gradient(to bottom, transparent, rgba(174, 214, 241, 0.8));
+            animation: rainfall 1s linear infinite;
+        }
+
+        .rain-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 1.5rem;
+            z-index: 10;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .rain-container:hover .rain-text,
+        .rain-container:active .rain-text {
+            opacity: 1;
+        }
+
+        /* Hidden Content */
+        .hidden-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .hidden-content.revealed {
+            max-height: 2000px;
+        }
+
+        /* Floating Hearts */
+        .heart {
+            position: fixed;
+            font-size: 1.5rem;
+            pointer-events: none;
+            z-index: 999;
+            animation: floatUp 4s ease-in infinite;
+            opacity: 0;
+        }
+
+        /* Sparkles */
+        .sparkle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            animation: sparkleAnim 1s ease-out;
+        }
+
+        /* Final Message */
+        .final-message {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+            animation: slideUp 0.6s ease;
+        }
+
+        .final-message h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .final-message p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        @keyframes rainfall {
+            to {
+                transform: translateY(300px);
+            }
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 0;
+                transform: translateY(0) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        @keyframes sparkleAnim {
+            0% {
+                opacity: 1;
+                transform: scale(0);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1) translateY(-50px);
+            }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .landing h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .photo-container {
+                height: 350px;
+            }
+            
+            .cake {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Landing Page -->
+    <div class="landing" id="landing">
+        <h1>✨ Happy Birthday Mebil! ✨</h1>
+        <p>Someone special made this just for you...</p>
+        <button class="start-btn" onclick="startJourney()">Begin Your Journey 🎁</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container" id="mainContent">
+        <div class="header">
+            <h1>Happy Birthday Machaan! 🎂</h1>
+            <div class="date">February 17th, 2025</div>
+            <div class="countdown" id="countdown"></div>
+        </div>
+
+        <!-- Photo Gallery -->
+        <div class="section">
+            <h2 style="text-align: center; margin-bottom: 20px;">Our Memories 📸</h2>
+            <div class="photo-gallery">
+                <div class="photo-container">
+                    <div class="photo active" id="photo1">
+                        <img src="1.jpeg" alt="Beach day together">
+                    </div>
+                    <div class="photo" id="photo2">
+                        <img src="2.jpeg" alt="Pancake moment">
+                    </div>
+                    <div class="photo" id="photo3">
+                        <img src="4.jpeg" alt="Beautiful smile">
+                    </div>
+                    <div class="photo" id="photo4">
+                        <img src="7.jpeg" alt="Selfie time">
+                    </div>
+                    <div class="photo" id="photo5">
+                        <img src="9.jpeg" alt="Together always">
+                    </div>
+                </div>
+                <div class="photo-nav">
+                    <div class="photo-dot active" onclick="showPhoto(0)"></div>
+                    <div class="photo-dot" onclick="showPhoto(1)"></div>
+                    <div class="photo-dot" onclick="showPhoto(2)"></div>
+                    <div class="photo-dot" onclick="showPhoto(3)"></div>
+                    <div class="photo-dot" onclick="showPhoto(4)"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Cake -->
+        <div class="section">
+            <h2 style="text-align: center; margin-bottom: 10px;">Make a Wish! 🎂</h2>
+            <div class="cake-container">
+                <div class="candles">🕯️ 🕯️ 🕯️</div>
+                <div class="cake" onclick="blowCandles()">🎂</div>
+                <p style="text-align: center; margin-top: 15px; opacity: 0.9;">Tap the cake to blow the candles!</p>
+            </div>
+        </div>
+
+        <!-- Message 1 -->
+        <div class="section">
+            <div class="message-box">
+                <strong>Hey Akku!</strong><br><br>
+                Happiest bday Mebileyy 🥳🎈🎈. No matter where life takes us, I will always be on your side and will always be your machaan🫂. 
+                Hope you have an awesome year and get everything you deserve 🌟.
+            </div>
+        </div>
+
+        <!-- Interactive Button 1 -->
+        <button class="interactive-btn" onclick="revealChocolates()">
+            Tap for a Sweet Surprise! 🍫
+        </button>
+
+        <!-- Hidden Memory -->
+        <div class="hidden-content" id="rainMemory">
+            <div class="section">
+                <h2 style="text-align: center; margin-bottom: 20px;">Remember This? 🌧️</h2>
+                <div class="rain-container" onclick="intensifyRain()">
+                    <div class="rain-text">That crazy day we danced in the rain... 💃🌧️<br><small>Our little secret!</small></div>
+                </div>
+                <div class="message-box" style="margin-top: 20px;">
+                    Nobody knows about that day except us! I'll never forget it. 
+                    Us dancing in the rain was one of my happiest, craziest and favourite moment with you ☔✨. Never lose that inner child inside you !
+                </div>
+            </div>
+        </div>
+
+        <!-- Message 2 -->
+        <div class="section">
+            <div class="message-box">
+                What I found special about you was your laugh, your energy and the way you understood me without judging. I know I can be a bit too much sometimes. Tolerating me 
+                would not have been easy 😜.   
+                These are rare, Machaan. 
+            </div>
+        </div>
+
+        <!-- Interactive Button 2 -->
+        <button class="interactive-btn" onclick="revealFinalMessage()" id="finalBtn">
+            One More Thing... 💌
+        </button>
+
+        <!-- Final Message (The Climax) -->
+        <div class="hidden-content" id="finalContent">
+            <div class="final-message">
+                <h2>From Me to You 💫</h2>
+                <p>
+                    Mebil, I spent months creating this because you deserve to know how much you mean to me.
+                    Not just today, but every single day.
+                </p>
+                <p>
+                    Thank you for being you, Machaan. For all the laughs, the memories, and everything in between. 
+                    You're genuinely one of the best things in my life. And I am grateful for that. 
+                </p>
+                <p style="margin-top: 25px; font-size: 1.3rem;">
+                    Happiesttt Birthday, Machaan! 🎂✨<br>
+                    Here's to many more adventures together.
+                </p>
+                <p style="margin-top: 20px; opacity: 0.9; font-size: 1rem;">
+                    - Your favorite person (hopefully! 😊)
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; padding: 40px 20px; opacity: 0.8;">
+            <p>Made with lots of coffee and sleepless nights 😜</p>
+        </div>
+    </div>
+
+    <script>
+        let currentPhoto = 0;
+        let raindrops = [];
+        let rainActive = false;
+
+        // Start Journey
+        function startJourney() {
+            document.getElementById('landing').classList.add('hidden');
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+                document.getElementById('mainContent').classList.add('visible');
+                updateCountdown();
+                setInterval(updateCountdown, 1000);
+                autoChangePhotos();
+            }, 800);
+        }
+
+        // Countdown to Birthday
+        function updateCountdown() {
+            const birthday = new Date('2025-02-17T00:00:00');
+            const now = new Date();
+            const diff = birthday - now;
+            
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('countdown').innerHTML = `
+                    <div class="countdown-number">${days}d ${hours}h ${minutes}m ${seconds}s</div>
+                    <div style="font-size: 1rem; margin-top: 10px; opacity: 0.9;">Until your special day! 🎉</div>
+                `;
+            } else {
+                document.getElementById('countdown').innerHTML = `
+                    <div class="countdown-number">🎉 IT'S YOUR DAY! 🎉</div>
+                `;
+            }
+        }
+
+        // Photo Gallery
+        function showPhoto(index) {
+            const photos = document.querySelectorAll('.photo');
+            const dots = document.querySelectorAll('.photo-dot');
+            
+            photos.forEach(p => p.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            
+            photos[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentPhoto = index;
+            
+            createSparkles();
+        }
+
+        function autoChangePhotos() {
+            setInterval(() => {
+                currentPhoto = (currentPhoto + 1) % 5;
+                showPhoto(currentPhoto);
+            }, 4000);
+        }
+
+        // Blow Candles
+        function blowCandles() {
+            const cake = document.querySelector('.cake');
+            const candles = document.querySelector('.candles');
+            
+            candles.style.opacity = '0';
+            candles.style.transition = 'opacity 0.5s';
+            
+            // Create confetti
+            for (let i = 0; i < 30; i++) {
+                createConfetti();
+            }
+            
+            setTimeout(() => {
+                candles.style.opacity = '1';
+            }, 3000);
+            
+            createHearts(3);
+        }
+
+        // Chocolate Rain
+        function revealChocolates() {
+            document.getElementById('rainMemory').classList.add('revealed');
+            
+            // Create chocolate rain
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => createChocolate(), i * 100);
+            }
+            
+            // Scroll to rain memory
+            setTimeout(() => {
+                document.getElementById('rainMemory').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        }
+
+        function createChocolate() {
+            const chocolate = document.createElement('div');
+            chocolate.className = 'chocolate';
+            chocolate.textContent = '🍫';
+            chocolate.style.left = Math.random() * 100 + '%';
+            chocolate.style.top = '-50px';
+            chocolate.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            document.body.appendChild(chocolate);
+            
+            setTimeout(() => chocolate.remove(), 4000);
+        }
+
+        // Rain Animation
+        function intensifyRain() {
+            if (!rainActive) {
+                const rainContainer = document.querySelector('.rain-container');
+                for (let i = 0; i < 30; i++) {
+                    const drop = document.createElement('div');
+                    drop.className = 'raindrop';
+                    drop.style.left = Math.random() * 100 + '%';
+                    drop.style.animationDelay = Math.random() * 1 + 's';
+                    drop.style.animationDuration = (Math.random() * 0.5 + 0.5) + 's';
+                    rainContainer.appendChild(drop);
+                }
+                rainActive = true;
+                
+                createHearts(2);
+            }
+        }
+
+        // Final Message
+        function revealFinalMessage() {
+            document.getElementById('finalContent').classList.add('revealed');
+            document.getElementById('finalBtn').style.display = 'none';
+            
+            // Create hearts
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => createHearts(1), i * 500);
+            }
+            
+            // Scroll to final message
+            setTimeout(() => {
+                document.getElementById('finalContent').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+            
+            // Create sparkles
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => createSparkles(), i * 100);
+            }
+        }
+
+        // Create Hearts
+        function createHearts(count) {
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = '💖';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.bottom = '-50px';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 4000);
+            }
+        }
+
+        // Create Confetti
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'chocolate';
+            const emojis = ['🎉', '✨', '🎊', '⭐', '💫'];
+            confetti.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.top = '-50px';
+            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => confetti.remove(), 4000);
+        }
+
+        // Create Sparkles
+        function createSparkles() {
+            for (let i = 0; i < 5; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => sparkle.remove(), 1000);
+            }
+        }
+
+        // Auto-create subtle hearts occasionally
+        setInterval(() => {
+            if (Math.random() > 0.7) {
+                createHearts(1);
+            }
+        }, 8000);
+    </script>
+</body>
+</html>
