@@ -43,7 +43,7 @@
         }
 
         .landing h1 {
-            font-size: 2rem;
+            font-size: 1.4rem;
             margin-bottom: 1rem;
             animation: fadeInDown 1s ease;
             text-align: center;
@@ -213,7 +213,7 @@
     
             #photo4 img {
                 object-position: center ;
-                transform: scale(0.95);
+                transform: scale(1.0);
             }
     
             #photo5 img {
@@ -377,6 +377,24 @@
             text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
             opacity: 0;
             transition: opacity 0.5s;
+        }
+        .rain-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 1.2rem;
+            z-index: 9;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            opacity: 1;
+            transition: opacity 0.5s;
+            animation: pulse 2s infinite;
+        }
+        
+        .rain-container:hover .rain-placeholder,
+        .rain-container:active .rain-placeholder {
+            opacity: 0;
         }
 
         .rain-container:hover .rain-text,
@@ -656,9 +674,8 @@
         <div class="section">
             <div class="message-box">
                 <strong>Hey Akku!</strong><br><br>
-                Another year, another adventure with you! I can't believe how time flies when we're together. 
-                You make every moment fun, every laugh louder, and every day brighter. 
-                Thank you for being the amazing person you are! 🌟
+                Happiest bday Mebileyy 🥳🎈🎈. No matter where life takes us, I will always be on your side and will always be your machaan🫂. 
+                Hope you have an awesome year and get everything you deserve 🌟.
             </div>
         </div>
 
@@ -672,12 +689,12 @@
             <div class="section">
                 <h2 style="text-align: center; margin-bottom: 20px;">Remember This? 🌧️</h2>
                 <div class="rain-container" onclick="intensifyRain()">
+                    <div class="rain-placeholder">Tap to reveal our secret... 🤫</div>
                     <div class="rain-text">That crazy day we danced in the rain... 💃🌧️<br><small>Our little secret!</small></div>
                 </div>
                 <div class="message-box" style="margin-top: 20px;">
-                    Nobody knows about that day, but I'll never forget it. 
-                    Dancing in the rain with you felt like the world stopped just for us. 
-                    Those spontaneous moments? They're my favorite. ☔✨
+                    Nobody knows about that day except us! I'll never forget it. 
+                    Us dancing in the rain was one of my happiest, craziest and favourite moment with you ☔✨. Never lose that inner child inside you !
                 </div>
             </div>
         </div>
@@ -685,9 +702,8 @@
         <!-- Message 2 -->
         <div class="section">
             <div class="message-box">
-                You know what's crazy? How you can turn the most boring day into an adventure. 
-                How you laugh at my terrible jokes. How you just... get me. 
-                That's rare, Machaan. That's special. 🌈
+                What I found special about you was your laugh, your energy and the way you understood me without judging. I know I can be a bit too much sometimes. Tolerating me 
+                would not have been easy 😜.
             </div>
         </div>
 
@@ -701,32 +717,26 @@
             <div class="final-message">
                 <h2>From Me to You 💫</h2>
                 <p>
-                    Mebil, I spent time creating this because you deserve to know how much you mean to me.
-                    Not just today, but every day.
+                    Mebil, I spent months creating this because you deserve to know how much you mean to me.
+                    Not just today, but every single day.
                 </p>
                 <p>
-                    You're not just my best friend – you're the person who makes life feel like it's in full color. 
-                    The one whose smile I think about when I need cheering up. 
-                    The one who makes everything better just by being there.
-                </p>
-                <p>
-                    I know we're friends, and that's something I treasure more than anything. 
-                    But I also want you to know that my life is infinitely better because you're in it. 
-                    However you choose to see it, that's the truth.
+                    Thank you for being you, Machaan. For all the laughs, the memories, and everything in between. 
+                    You're genuinely one of the best things in my life. And I am grateful for that.
                 </p>
                 <p style="margin-top: 25px; font-size: 1.3rem;">
                     Happy Birthday, Machaan! 🎂✨<br>
-                    Here's to many more adventures together.
+                    Cheers to many more years of fun, laughter and craziness together.
                 </p>
                 <p style="margin-top: 20px; opacity: 0.9; font-size: 1rem;">
-                    - Your favorite person (hopefully! 😊)
+                    -Your favorite person (hopefully!😊)
                 </p>
             </div>
         </div>
 
         <!-- Footer -->
         <div style="text-align: center; padding: 40px 20px; opacity: 0.8;">
-            <p>Made with ✨ and lots of coffee<br>February 2025</p>
+            <p>Made with lots of coffee and sleepless nights 😜</p>
         </div>
     </div>
 
@@ -929,5 +939,6 @@
     </script>
 </body>
 </html>
+
 
 
