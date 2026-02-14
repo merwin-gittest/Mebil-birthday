@@ -381,32 +381,40 @@
             transition: opacity 0.5s;
         }
         .rain-placeholder {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            font-size: 1.2rem;
-            z-index: 9;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-            opacity: 1;
-            transition: opacity 0.5s;
-            width: 100%;
-            padding: 0 20px;
-            pointer-events: none;
-            animation: pulsePlaceholder 2s infinite;  /* ADD THIS LINE */
-        }
-        
-        @keyframes pulsePlaceholder {
-            0%, 100% { 
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1); 
-            }
-            50% { 
-                opacity: 0.7;
-                transform: translate(-50%, -50%) scale(1.05); 
-            }
-        }
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 1.2rem;
+    z-index: 9;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    opacity: 1;
+    transition: opacity 0.5s, transform 0.3s;  /* CHANGED */
+    width: 100%;
+    padding: 0 20px;
+    pointer-events: none;
+}
+
+/* Simple pulse without opacity */
+@keyframes pulsePlaceholder {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1); 
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.05); 
+    }
+}
+
+.rain-container:not(:hover):not(:active) .rain-placeholder {
+    animation: pulsePlaceholder 2s infinite;
+}
+
+.rain-container:hover .rain-placeholder,
+.rain-container:active .rain-placeholder {
+    opacity: 0 !important;  /* FORCE IT */
+    animation: none;  /* STOP ANIMATION */
+}
         
         .rain-container:hover .rain-placeholder,
         .rain-container:active .rain-placeholder {
@@ -961,6 +969,7 @@
     </script>
 </body>
 </html>
+
 
 
 
