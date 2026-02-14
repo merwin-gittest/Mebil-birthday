@@ -391,11 +391,21 @@
             text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
             opacity: 1;
             transition: opacity 0.5s;
-            /*animation: pulse 2s infinite;*/
             width: 100%;
-            /*max-width: 300px;*/
             padding: 0 20px;
             pointer-events: none;
+            animation: pulsePlaceholder 2s infinite;  /* ADD THIS LINE */
+        }
+        
+        @keyframes pulsePlaceholder {
+            0%, 100% { 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1); 
+            }
+            50% { 
+                opacity: 0.7;
+                transform: translate(-50%, -50%) scale(1.05); 
+            }
         }
         
         .rain-container:hover .rain-placeholder,
@@ -507,16 +517,7 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
         }
-        @keyframes pulsePlaceholder {
-            0%, 100% { 
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1); 
-            }
-            50% { 
-                opacity: 0.7;
-                transform: translate(-50%, -50%) scale(1.05); 
-            }
-        }
+        
         
         .rain-placeholder {
             animation: pulsePlaceholder 2s infinite;
@@ -636,7 +637,7 @@
 <body>
     <!-- Landing Page -->
     <div class="landing" id="landing">
-        <h1>✨ Happy Birthday Mebil! 🎂💖 ✨</h1>
+        <h1>✨ Happy Birthday Mebil! 🎂💖✨</h1>
         <p>Made this just for you...</p>
         <button class="start-btn" onclick="startJourney()">Begin Your Journey 🎁</button>
     </div>
@@ -693,7 +694,7 @@
         <!-- Message 1 -->
         <div class="section">
             <div class="message-box">
-                <strong>Hey Akku!</strong><br><br>
+                <strong>Hey Akku!</strong><br>
                 Happiestt bday Mebileyyy 🥳🎈🎈. No matter where life takes us, I will always be on your side and will always be your machaan🫂. 
                 Hope you have an awesome year and get everything you deserve 🌟.
             </div>
@@ -960,6 +961,7 @@
     </script>
 </body>
 </html>
+
 
 
 
